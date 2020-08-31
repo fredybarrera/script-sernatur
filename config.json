@@ -1,0 +1,133 @@
+{
+    "tables": [{
+        "table": "data_eat",
+        "attributes": [
+            "id",
+            "nombre",
+            "uid",
+            "dias_funciona",
+            "total_unidad_alojamiento",
+            "total_plazas",
+            "total_llegada_nacional",
+            "total_pernocta_nacional",
+            "total_llegada_extranjero",
+            "total_pernocta_extranjero",
+            "total_llegadas",
+            "total_pernocta",
+            "unidad_alojamiento_ocupada",
+            "plaza_adicional_instalada",
+            "ingreso_neto_alojamiento",
+            "ingreso_neto_otros",
+            "total_ingreso_neto",
+            "hab_dia_disponible",
+            "plaza_dia_disponible",
+            "factor_expansion",
+            "descripcion",
+            "codigo_carga"
+        ],
+        "relations": [
+            {
+                "table": "anio",
+                "type": "left join",
+                "field_from": "id_anio",
+                "field_to": "id",
+                "fields": [
+                    "nombre"
+                ]
+            },{
+                "table": "mes",
+                "type": "left join",
+                "field_from": "id_mes",
+                "field_to": "id",
+                "fields": [
+                    "nombre"
+                ]
+            },{
+                "table": "comuna",
+                "type": "left join",
+                "field_from": "id_comuna",
+                "field_to": "id",
+                "fields": [
+                    "nombre",
+                    "codigo_cut"
+                ]
+            },{
+                "table": "provincia",
+                "type": "left join",
+                "field_from": "id_provincia",
+                "field_to": "id",
+                "fields": [
+                    "nombre"
+                ]
+            },{
+                "table": "region",
+                "type": "left join",
+                "field_from": "id_region",
+                "field_to": "id",
+                "fields": [
+                    "nombre"
+                ]
+            },{
+                "table": "eat_destino",
+                "type": "left join",
+                "field_from": "id_eat_destino",
+                "field_to": "id",
+                "fields": [
+                    "nombre"
+                ]
+            },{
+                "table": "eat_llyp_nacional",
+                "type": "left join",
+                "field_from": "id",
+                "field_to": "id_data_eat",
+                "fields": [
+                    "llegadas",
+                    "pernocta"
+                ]
+            },{
+                "table": "eat_llyp_extranjero",
+                "type": "left join",
+                "field_from": "id",
+                "field_to": "id_data_eat",
+                "fields": [
+                    "llegadas",
+                    "pernocta"
+                ]
+            },{
+                "table": "eat_total_ta",
+                "type": "left join",
+                "field_from": "id",
+                "field_to": "id_data_eat",
+                "fields": [
+                    "total_ta",
+                    "total_plazas",
+                    "descripcion"
+                ]
+            },{
+                "table": "eat_clase_alojamiento",
+                "type": "left join",
+                "field_from": "id_eat_clase_alojamiento",
+                "field_to": "id",
+                "fields": [
+                    "nombre"
+                ]
+            },{
+                "table": "eat_temporada",
+                "type": "left join",
+                "field_from": "id_eat_temporada",
+                "field_to": "id",
+                "fields": [
+                    "nombre"
+                ]
+            },{
+                "table": "tipo_activo",
+                "type": "left join",
+                "field_from": "id_tipo_activo",
+                "field_to": "id",
+                "fields": [
+                    "nombre"
+                ]
+            }]
+        }
+    ]
+}

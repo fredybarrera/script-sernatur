@@ -1,0 +1,23 @@
+{
+    "tables": [
+        {
+            "table": "nombre_tabla_principal",
+            "attributes": [
+                "atributo de la tabla principal 1",
+                "atributo de la tabla principal 2..."
+            ],
+            "relations": [
+                {
+                    "table": "nombre_tabla_relacionada",
+                    "type": "tipo de relacion con la tabla relacionada, puede ser: left join, inner join, right join",
+                    "field_from": "campo de la tabla principal asociado a la tabla relacionada (FK)",
+                    "field_to": "id de la tabla relacionada (PK)",
+                    "fields": [
+                        "atributo de la tabla relacionada 1",
+                        "atributo de la tabla relacionada 2..."
+                    ]
+                }
+            ]
+        }
+    ]
+}
