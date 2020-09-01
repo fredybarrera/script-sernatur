@@ -1,5 +1,84 @@
 {
     "tables": [{
+        "table": "data_act",
+        "attributes": [
+            "id",
+            "numero_empresas",
+            "ventas_uf",
+            "numero_trabajadores",
+            "trabajadores_femenino_informado",
+            "trabajadores_masculino_informado",
+            "renta_neta",
+            "renta_neta_femenino",
+            "renta_neta_masculino",
+            "trabajadores_ponderados",
+            "trabajadores_ponderados_femenino",
+            "trabajadores_ponderados_masculinos",
+            "descripcion"
+        ],
+        "relations": [
+            {
+                "table": "anio",
+                "type": "left join",
+                "field_from": "id_anio",
+                "field_to": "id",
+                "fields": [
+                    "nombre"
+                ]
+            },{
+                "table": "act",
+                "type": "left join",
+                "field_from": "id_act",
+                "field_to": "id",
+                "fields": [
+                    "nombre",
+                    "descripcion"
+                ]
+            },{
+                "table": "comuna",
+                "type": "left join",
+                "field_from": "id_comuna",
+                "field_to": "id",
+                "fields": [
+                    "nombre",
+                    "codigo_cut"
+                ]
+            },{
+                "table": "provincia",
+                "type": "left join",
+                "field_from": "id_provincia",
+                "field_to": "id",
+                "fields": [
+                    "nombre"
+                ]
+            },{
+                "table": "region",
+                "type": "left join",
+                "field_from": "id_region",
+                "field_to": "id",
+                "fields": [
+                    "nombre"
+                ]
+            },{
+                "table": "carga",
+                "type": "left join",
+                "field_from": "id_region",
+                "field_to": "id",
+                "fields": [
+                    "nombre",
+                    "file_name",
+                    "file_size"
+                ]
+            },{
+                "table": "tipo_activo",
+                "type": "left join",
+                "field_from": "id_tipo_activo",
+                "field_to": "id",
+                "fields": [
+                    "nombre"
+                ]
+            }
+        ]},{
         "table": "data_eat",
         "attributes": [
             "id",
@@ -127,7 +206,662 @@
                 "fields": [
                     "nombre"
                 ]
-            }]
+            }
+        ]},{
+        "table": "data_sat",
+        "attributes": [
+            "id",
+            "nombre",
+            "codigo",
+            "anio_creacion",
+            "numero_habitacion",
+            "numero_departamento",
+            "numero_cabana",
+            "numero_camping",
+            "numero_camas",
+            "total_unidades_alojamiento",
+            "descripcion"
+        ],
+        "relations": [
+            {
+                "table": "anio",
+                "type": "left join",
+                "field_from": "id_anio",
+                "field_to": "id",
+                "fields": [
+                    "nombre"
+                ]
+            },{
+                "table": "comuna",
+                "type": "left join",
+                "field_from": "id_comuna",
+                "field_to": "id",
+                "fields": [
+                    "nombre",
+                    "codigo_cut"
+                ]
+            },{
+                "table": "provincia",
+                "type": "left join",
+                "field_from": "id_provincia",
+                "field_to": "id",
+                "fields": [
+                    "nombre"
+                ]
+            },{
+                "table": "region",
+                "type": "left join",
+                "field_from": "id_region",
+                "field_to": "id",
+                "fields": [
+                    "nombre"
+                ]
+            },{
+                "table": "clase_alojamiento",
+                "type": "left join",
+                "field_from": "id_clase_alojamiento",
+                "field_to": "id",
+                "fields": [
+                    "nombre"
+                ]
+            },{
+                "table": "carga",
+                "type": "left join",
+                "field_from": "codigo_carga",
+                "field_to": "id",
+                "fields": [
+                    "file_name",
+                    "fecha",
+                    "descripcion"
+                ]
+            },{
+                "table": "tipo_activo",
+                "type": "left join",
+                "field_from": "id_tipo_activo",
+                "field_to": "id",
+                "fields": [
+                    "nombre"
+                ]
+            }
+        ]},{
+        "table": "data_iit",
+        "attributes": [
+            "id",
+            "nombre",
+            "poblacion_flotante",
+            "venta_total_uf",
+            "ventas_sii",
+            "trabajadores_sii",
+            "renta_neta_trabajadores_sii",
+            "pernocta_vivienda_particular",
+            "unidades_alojamiento",
+            "plazas_emat",
+            "llegadas_emat",
+            "pernocta_emat",
+            "alojamiento_registro",
+            "turismo_aventura_registro",
+            "empresas_sii",
+            "snaspe",
+            "atractivos",
+            "indice_iit",
+            "descripcion"
+        ],
+        "relations": [
+            {
+                "table": "anio",
+                "type": "left join",
+                "field_from": "id_anio",
+                "field_to": "id",
+                "fields": [
+                    "nombre"
+                ]
+            },{
+                "table": "comuna",
+                "type": "left join",
+                "field_from": "id_comuna",
+                "field_to": "id",
+                "fields": [
+                    "nombre",
+                    "codigo_cut"
+                ]
+            },{
+                "table": "provincia",
+                "type": "left join",
+                "field_from": "id_provincia",
+                "field_to": "id",
+                "fields": [
+                    "nombre"
+                ]
+            },{
+                "table": "region",
+                "type": "left join",
+                "field_from": "id_region",
+                "field_to": "id",
+                "fields": [
+                    "nombre"
+                ]
+            },{
+                "table": "iit_grupo",
+                "type": "left join",
+                "field_from": "id_grupo",
+                "field_to": "id",
+                "fields": [
+                    "nombre"
+                ]
+            },{
+                "table": "carga",
+                "type": "left join",
+                "field_from": "codigo_carga",
+                "field_to": "id",
+                "fields": [
+                    "file_name",
+                    "fecha",
+                    "descripcion"
+                ]
+            }
+        ]},{
+        "table": "data_pf",
+        "attributes": [
+            "id",
+            "nombre",
+            "total",
+            "descripcion"
+        ],
+        "relations": [
+            {
+                "table": "anio",
+                "type": "left join",
+                "field_from": "id_anio",
+                "field_to": "id",
+                "fields": [
+                    "nombre"
+                ]
+            },{
+                "table": "comuna",
+                "type": "left join",
+                "field_from": "id_comuna",
+                "field_to": "id",
+                "fields": [
+                    "nombre",
+                    "codigo_cut"
+                ]
+            },{
+                "table": "provincia",
+                "type": "left join",
+                "field_from": "id_provincia",
+                "field_to": "id",
+                "fields": [
+                    "nombre"
+                ]
+            },{
+                "table": "region",
+                "type": "left join",
+                "field_from": "id_region",
+                "field_to": "id",
+                "fields": [
+                    "nombre"
+                ]
+            },{
+                "table": "carga",
+                "type": "left join",
+                "field_from": "codigo_carga",
+                "field_to": "id",
+                "fields": [
+                    "file_name",
+                    "fecha",
+                    "descripcion"
+                ]
+            }
+        ]},{
+        "table": "data_snaspe",
+        "attributes": [
+            "id",
+            "nombre",
+            "nacional",
+            "extranjero",
+            "menor",
+            "adulto",
+            "adulto_mayor",
+            "hombre",
+            "mujer",
+            "total",
+            "minusvalido",
+            "descripcion"
+        ],
+        "relations": [
+            {
+                "table": "anio",
+                "type": "left join",
+                "field_from": "id_anio",
+                "field_to": "id",
+                "fields": [
+                    "nombre"
+                ]
+            },{
+                "table": "region",
+                "type": "left join",
+                "field_from": "id_region",
+                "field_to": "id",
+                "fields": [
+                    "nombre",
+                    "codigo_cut"
+                ]
+            },{
+                "table": "tipo_activo",
+                "type": "left join",
+                "field_from": "id_tipo_activo",
+                "field_to": "id",
+                "fields": [
+                    "nombre"
+                ]
+            },{
+                "table": "carga",
+                "type": "left join",
+                "field_from": "codigo_carga",
+                "field_to": "id",
+                "fields": [
+                    "file_name",
+                    "fecha",
+                    "descripcion"
+                ]
+            },{
+                "table": "snaspe",
+                "type": "left join",
+                "field_from": "id_snaspe",
+                "field_to": "id",
+                "fields": [
+                    "nombre",
+                    "descripcion"
+                ]
+            }
+        ]},{
+        "table": "data_ene",
+        "attributes": [
+            "id",
+            "nombre",
+            "hombre_turismo",
+            "mujer_turismo",
+            "total_hombre_ocupados",
+            "total_mujer_ocupados",
+            "total_ocupados",
+            "total_ocupados_turismo",
+            "descripcion"
+        ],
+        "relations": [
+            {
+                "table": "anio",
+                "type": "left join",
+                "field_from": "id_anio",
+                "field_to": "id",
+                "fields": [
+                    "nombre"
+                ]
+            },{
+                "table": "region",
+                "type": "left join",
+                "field_from": "id_region",
+                "field_to": "id",
+                "fields": [
+                    "nombre",
+                    "codigo_cut"
+                ]
+            },{
+                "table": "tipo_activo",
+                "type": "left join",
+                "field_from": "id_tipo_activo",
+                "field_to": "id",
+                "fields": [
+                    "nombre"
+                ]
+            },{
+                "table": "trimestre_movil",
+                "type": "left join",
+                "field_from": "id_trimestre_movil",
+                "field_to": "id",
+                "fields": [
+                    "nombre",
+                    "codigo",
+                    "descripcion"
+                ]
+            }
+        ]},{
+        "table": "data_pdi",
+        "attributes": [
+            "id",
+            "nombre",
+            "total_llegadas",
+            "descripcion"
+        ],
+        "relations": [
+            {
+                "table": "anio",
+                "type": "left join",
+                "field_from": "id_anio",
+                "field_to": "id",
+                "fields": [
+                    "nombre"
+                ]
+            },{
+                "table": "mes",
+                "type": "left join",
+                "field_from": "id_mes",
+                "field_to": "id",
+                "fields": [
+                    "nombre"
+                ]
+            },{
+                "table": "pais",
+                "type": "left join",
+                "field_from": "id_pais",
+                "field_to": "id",
+                "fields": [
+                    "nombre",
+                    "codigo"
+                ]
+            },{
+                "table": "region_omt",
+                "type": "left join",
+                "field_from": "id_continente",
+                "field_to": "id",
+                "fields": [
+                    "nombre",
+                    "descripcion"
+                ]
+            },{
+                "table": "region",
+                "type": "left join",
+                "field_from": "id_region",
+                "field_to": "id",
+                "fields": [
+                    "nombre",
+                    "codigo_cut"
+                ]
+            },{
+                "table": "tipo_activo",
+                "type": "left join",
+                "field_from": "id_tipo_activo",
+                "field_to": "id",
+                "fields": [
+                    "nombre"
+                ]
+            },{
+                "table": "carga",
+                "type": "left join",
+                "field_from": "codigo_carga",
+                "field_to": "id",
+                "fields": [
+                    "file_name",
+                    "fecha",
+                    "descripcion"
+                ]
+            },{
+                "table": "paso",
+                "type": "left join",
+                "field_from": "id_paso",
+                "field_to": "id",
+                "fields": [
+                    "nombre",
+                    "codigo",
+                    "descripcion"
+                ]
+            },{
+                "table": "paso_r1",
+                "type": "left join",
+                "field_from": "id_paso_r1",
+                "field_to": "id",
+                "fields": [
+                    "nombre",
+                    "descripcion"
+                ]
+            },{
+                "table": "paso_r2",
+                "type": "left join",
+                "field_from": "id_paso_r2",
+                "field_to": "id",
+                "fields": [
+                    "nombre",
+                    "descripcion"
+                ]
+            },{
+                "table": "paso_r3",
+                "type": "left join",
+                "field_from": "id_paso_r3",
+                "field_to": "id",
+                "fields": [
+                    "nombre",
+                    "descripcion"
+                ]
+            },{
+                "table": "paso_r4",
+                "type": "left join",
+                "field_from": "id_paso_r4",
+                "field_to": "id",
+                "fields": [
+                    "nombre",
+                    "descripcion"
+                ]
+            },{
+                "table": "paso_r5",
+                "type": "left join",
+                "field_from": "id_paso_r5",
+                "field_to": "id",
+                "fields": [
+                    "nombre",
+                    "descripcion"
+                ]
+            }
+        ]},{
+        "table": "data_jac",
+        "attributes": [
+            "id",
+            "nombre",
+            "pasajeros_llegada",
+            "pasajeros_salida",
+            "pasajeros_to",
+            "pasajero_km",
+            "carga_llegada",
+            "carga_salida",
+            "carga_to",
+            "carga_km",
+            "distancia",
+            "descripcion"
+        ],
+        "relations": [
+           {
+            "table": "anio",
+            "type": "left join",
+            "field_from": "id_anio",
+            "field_to": "id",
+            "fields": [
+                "nombre"
+            ]
+        },{
+            "table": "tipo_activo",
+            "type": "left join",
+            "field_from": "id_tipo_activo",
+            "field_to": "id",
+            "fields": [
+                "nombre"
+            ]
+        },{
+            "table": "carga",
+            "type": "left join",
+            "field_from": "codigo_carga",
+            "field_to": "id",
+            "fields": [
+                "file_name",
+                "fecha",
+                "descripcion"
+            ]
+        },{
+            "table": "pais as pais_origen",
+            "type": "left join",
+            "field_from": "id_pais_origen",
+            "field_to": "id",
+            "fields": [
+                "nombre",
+                "codigo"
+            ]
+        },{
+            "table": "pais as pais_destino",
+            "type": "left join",
+            "field_from": "id_pais_destino",
+            "field_to": "id",
+            "fields": [
+                "nombre",
+                "codigo"
+            ]
+        },{
+            "table": "mes",
+            "type": "left join",
+            "field_from": "id_mes",
+            "field_to": "id",
+            "fields": [
+                "nombre"
+            ]
+        },{
+            "table": "region_omt as region_omt_origen",
+            "type": "left join",
+            "field_from": "id_region_omt_origen",
+            "field_to": "id",
+            "fields": [
+                "nombre",
+                "descripcion"
+            ]
+        },{
+            "table": "region_omt as region_omt_destino",
+            "type": "left join",
+            "field_from": "id_region_omt_destino",
+            "field_to": "id",
+            "fields": [
+                "nombre",
+                "descripcion"
+            ]
+        },{
+            "table": "ciudad as ciudad_origen",
+            "type": "left join",
+            "field_from": "id_ciudad_origen",
+            "field_to": "id",
+            "fields": [
+                "nombre"
+            ]
+        },{
+            "table": "ciudad as ciudad_destino",
+            "type": "left join",
+            "field_from": "id_ciudad_destino",
+            "field_to": "id",
+            "fields": [
+                "nombre"
+            ]
+        },{
+            "table": "aeropuerto as aeropuerto_origen",
+            "type": "left join",
+            "field_from": "id_aeropuerto_origen",
+            "field_to": "id",
+            "fields": [
+                "nombre",
+                "codigo_area"
+            ]
+        },{
+            "table": "aeropuerto as aeropuerto_destino",
+            "type": "left join",
+            "field_from": "id_aeropuerto_destino",
+            "field_to": "id",
+            "fields": [
+                "nombre",
+                "codigo_area"
+            ]
+        },{
+            "table": "linea_aerea",
+            "type": "left join",
+            "field_from": "id_linea_aerea",
+            "field_to": "id",
+            "fields": [
+                "nombre",
+                "codigo"
+            ]
+        },{
+            "table": "tipo_nacional",
+            "type": "left join",
+            "field_from": "id_tipo_nacional",
+            "field_to": "id",
+            "fields": [
+                "nombre",
+                "descripcion"
+            ]
         }
-    ]
+        ]},{
+        "table": "data_mop",
+        "attributes": [
+            "id",
+            "nombre",
+            "tv01",
+            "tv02",
+            "tv03",
+            "tv04",
+            "tv05",
+            "tv06",
+            "tv07",
+            "tv08",
+            "tv09",
+            "tv10",
+            "tv11",
+            "tv12",
+            "tv13",
+            "tv14",
+            "agrupa_turismo",
+            "agrupa1",
+            "agrupa2",
+            "agrupa3",
+            "agrupa4",
+            "agrupa5",
+            "agrupa6",
+            "descripcion"
+        ],
+        "relations": [
+            {
+                "table": "anio",
+                "type": "left join",
+                "field_from": "id_anio",
+                "field_to": "id",
+                "fields": [
+                    "nombre"
+                ]
+            },{
+                "table": "tipo_activo",
+                "type": "left join",
+                "field_from": "id_tipo_activo",
+                "field_to": "id",
+                "fields": [
+                    "nombre"
+                ]
+            },{
+                "table": "carga",
+                "type": "left join",
+                "field_from": "codigo_carga",
+                "field_to": "id",
+                "fields": [
+                    "file_name",
+                    "fecha",
+                    "descripcion"
+                ]
+            },{
+                "table": "mes",
+                "type": "left join",
+                "field_from": "id_mes",
+                "field_to": "id",
+                "fields": [
+                    "nombre"
+                ]
+            },{
+                "table": "peaje",
+                "type": "left join",
+                "field_from": "id_peaje",
+                "field_to": "id",
+                "fields": [
+                    "nombre"
+                ]
+            }
+        ]
+    }]
 }
