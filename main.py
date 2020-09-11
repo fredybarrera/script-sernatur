@@ -32,34 +32,45 @@ def main():
 
     timeStart = time.time()
     print("Proceso iniciado... {0}".format(str(datetime.now())))
+    utils.log("Proceso iniciado")
 
     conexion = utils.getConexion()
 
     data = get_querys()
+    utils.log("Obteniendo querys")
+
 
     print("Obteniendo token... ")
     token = utils.get_token()
 
     if len(data) > 0:
         for k in data:
+            active = k['active']
             cantidad_paginas = get_cantidad_paginas(conexion, k['table'])
             clear_table(k['table'], cantidad_paginas, token)
-            for num in range(0, cantidad_paginas):
-                print('Actualizando {0}, pagina {1} de {2}'.format(
-                    k['table'], str(num), str(cantidad_paginas)))
-                query = k['query'] + str(1000*num) + \
-                    " ROWS FETCH NEXT " + \
-                    str(1000) + " ROWS ONLY"
-                # query = k['query'] + "limit 10"
-                cursor = execute_querys(conexion, query)
-                insert_data = format_data(cursor, k['fields'])
-                # print('insert_data: ', insert_data)
-                insert_service(insert_data, k['table'], token)
+            if active:
+                utils.log("Insertando en tabla: {}".format(k['table']))
+                for num in range(0, cantidad_paginas):
+                    print('Actualizando {0}, pagina {1} de {2}'.format(
+                        k['table'], str(num), str(cantidad_paginas)))
+                    query = k['query'] + str(1000*num) + \
+                        " ROWS FETCH NEXT " + \
+                        str(1000) + " ROWS ONLY"
+                    # query = k['query'] + "limit 10"
+                    cursor = execute_querys(conexion, query)
+                    insert_data = format_data(cursor, k['fields'])
+                    # print('insert_data: ', insert_data)
+                    insert_service(insert_data, k['table'], token)
+
 
     timeEnd = time.time()
     timeElapsed = timeEnd - timeStart
     print("Proceso finalizado... {0}".format(str(datetime.now())))
     print("Tiempo de ejecución: {0}".format(str(utils.convert_seconds(timeElapsed))))
+    utils.log("Tiempo de ejecución: {0}".format(
+        str(utils.convert_seconds(timeElapsed))))
+    utils.log("Proceso finalizado\n")
+
 
     conexion.close()
 
@@ -69,6 +80,7 @@ def clear_table(table, cantidad_paginas, token):
 
     try:
         print('Limpiando tabla {0}'.format(table))
+        utils.log("Limpiando tabla {0}".format(table))
 
         url = const.URL_BASE + table + '/FeatureServer/0/query'
         params = {
@@ -113,7 +125,9 @@ def clear_table(table, cantidad_paginas, token):
 
     except:
         print("Failed clear_table (%s)" %
-              traceback.format_exc())
+            traceback.format_exc())
+        utils.error_log("Failed clear_table (%s)" %
+            traceback.format_exc())
 
 def insert_service(data, table, token):
     """Realizada el insert de los datos de la tabla en el servicio rest."""
@@ -121,14 +135,18 @@ def insert_service(data, table, token):
     try:
         if len(data) > 0:
             url = const.URL_BASE + table + '/FeatureServer/0/addFeatures'
+            # utils.log("Insertando regitros en {0}".format(url))
             # print('insert_service: ', url)
             # print('json.dumps(data): ', len(data))
             response = utils.post_request_add(
                 url, token, json.dumps(data))
             print('response: ', response)
+
     except:
         print("Failed insert_service (%s)" %
-              traceback.format_exc())
+            traceback.format_exc())
+        utils.error_log("Failed insert_service (%s)" %
+            traceback.format_exc())
 
 def get_cantidad_paginas(conexion, table):
     """Retorna la cantidad de paginas para una tabla determinada."""
@@ -142,9 +160,12 @@ def get_cantidad_paginas(conexion, table):
         cantidad_paginas = get_cantidad_por_pagina(
             cantidad, datos_pagina)
         return cantidad_paginas
+
     except:
         print("Failed get_cantidad_paginas (%s)" %
-              traceback.format_exc())
+            traceback.format_exc())
+        utils.error_log("Failed get_cantidad_paginas (%s)" %
+            traceback.format_exc())
 
 def get_cantidad_por_pagina(cantidad, datos_pagina):
     try:
@@ -155,9 +176,12 @@ def get_cantidad_por_pagina(cantidad, datos_pagina):
         if page[1] != 0:
             cantidad_paginas = cantidad_paginas + 1
         return cantidad_paginas
+
     except:
         print("Failed get_cantidad_por_pagina (%s)" %
-              traceback.format_exc())
+            traceback.format_exc())
+        utils.error_log("Failed get_cantidad_por_pagina (%s)" %
+            traceback.format_exc())
 
 def get_querys():
     """Permite generar consultas SQL diámicas desde un archivo .json de configuración."""
@@ -178,6 +202,7 @@ def get_querys():
                 fields = []
                 fields_table = []
                 table = p['table']
+                active = p['active']
                 # order = "order by {}.id".format(table)
                 order = "order by ID OFFSET"
                 if "attributes" in p:
@@ -210,12 +235,14 @@ def get_querys():
                 query += "select {0} from {1} {2} {3} {4}".format(
                     str_fields, table, joins, order, limit)
                 data_querys.append(
-                    {'table': table, 'query': query, 'fields': fields_table})
+                    {'table': table, 'query': query, 'fields': fields_table, 'active': active})
         return data_querys
 
     except:
         print("Failed get_querys (%s)" %
-              traceback.format_exc())
+            traceback.format_exc())
+        utils.error_log("Failed get_querys (%s)" %
+            traceback.format_exc())
 
 
 def execute_querys(conexion, query):
@@ -228,7 +255,9 @@ def execute_querys(conexion, query):
     
     except:
         print("Failed execute_querys (%s)" %
-              traceback.format_exc())
+            traceback.format_exc())
+        utils.error_log("Failed execute_querys (%s)" %
+            traceback.format_exc())
     
 def format_data(cursor, fields):
     """Formatea la data obtenida desde la consulta SQL dinámica."""
@@ -245,9 +274,12 @@ def format_data(cursor, fields):
                 'attributes': attributes
             })
         return data
+
     except:
         print("Failed format_data (%s)" %
-              traceback.format_exc())
+            traceback.format_exc())
+        utils.error_log("Failed format_data (%s)" %
+            traceback.format_exc())
 
 
 if __name__ == '__main__':

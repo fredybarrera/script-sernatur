@@ -1,6 +1,7 @@
 {
     "tables": [{
         "table": "data_act",
+        "active": true,
         "attributes": [
             "id",
             "numero_empresas",
@@ -80,6 +81,7 @@
             }
         ]},{
         "table": "data_eat",
+        "active": true,
         "attributes": [
             "id",
             "nombre",
@@ -209,6 +211,7 @@
             }
         ]},{
         "table": "data_sat",
+        "active": true,
         "attributes": [
             "id",
             "nombre",
@@ -285,6 +288,7 @@
             }
         ]},{
         "table": "data_iit",
+        "active": true,
         "attributes": [
             "id",
             "nombre",
@@ -361,6 +365,7 @@
             }
         ]},{
         "table": "data_pf",
+        "active": true,
         "attributes": [
             "id",
             "nombre",
@@ -414,6 +419,7 @@
             }
         ]},{
         "table": "data_snaspe",
+        "active": true,
         "attributes": [
             "id",
             "nombre",
@@ -476,6 +482,7 @@
             }
         ]},{
         "table": "data_ene",
+        "active": true,
         "attributes": [
             "id",
             "nombre",
@@ -526,6 +533,7 @@
             }
         ]},{
         "table": "data_pdi",
+        "active": true,
         "attributes": [
             "id",
             "nombre",
@@ -652,6 +660,7 @@
             }
         ]},{
         "table": "data_jac",
+        "active": true,
         "attributes": [
             "id",
             "nombre",
@@ -792,6 +801,7 @@
         }
         ]},{
         "table": "data_mop",
+        "active": true,
         "attributes": [
             "id",
             "nombre",

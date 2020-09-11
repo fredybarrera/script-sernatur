@@ -8,7 +8,6 @@
 # Licence:      <your licence>
 #-------------------------------------------------------------------------------
 
-from bs4 import BeautifulSoup
 from datetime import datetime
 import psycopg2
 from psycopg2.extras import RealDictCursor
@@ -20,6 +19,7 @@ import traceback
 import json
 import os
 
+script_dir = os.path.dirname(__file__)
 
 #-------------------------------------------------------------------------------
 # Retorna un token de acceso a los servicios
@@ -36,7 +36,7 @@ def get_token():
         return token['access_token']
     except:
         print("Failed get_token (%s), (%s)" %
-              traceback.format_exc(), url_rest)
+            traceback.format_exc(), url_rest)
 
 #-------------------------------------------------------------------------------
 # Retorna una conexion hacia Postgres
@@ -48,7 +48,7 @@ def getConexion():
         return conexion
     except:
         print("Failed getConexion (%s), (%s)" %
-              traceback.format_exc(), url_rest)
+            traceback.format_exc(), url_rest)
 
 #-------------------------------------------------------------------------------
 # Permite ejecutar una consulta de tipo POST al servicio REST
@@ -63,7 +63,7 @@ def post_request(url_rest, token, where):
         return requests.post(url_rest, data=data, headers=get_headers())
     except:
         print("Failed post_request (%s), (%s)" %
-              traceback.format_exc(), url_rest)
+            traceback.format_exc(), url_rest)
 
 #-------------------------------------------------------------------------------
 # Permite insertar features al servicio REST
@@ -78,7 +78,7 @@ def post_request_add(url_rest, token, features):
         return requests.post(url_rest, data=data, headers=get_headers())
     except:
         print("Failed post_request (%s), (%s)" %
-              traceback.format_exc(), url_rest)
+            traceback.format_exc(), url_rest)
 
 #-------------------------------------------------------------------------------
 # Realiza una peticion http de tipo get simple
@@ -109,7 +109,7 @@ def post_request_json_raw_data(url, raw_data):
         return False
     except:
         print("Failed post_request_payload (%s)" %
-              traceback.format_exc())
+            traceback.format_exc())
 
 #-------------------------------------------------------------------------------
 # Limpia las capas de resultados
@@ -120,7 +120,8 @@ def limpiar_capas_analisis(url_rest, table, token, where):
         response = post_request(url, token, where)
         return response
     except:
-        print("Failed limpiar_capas_analisis (%s)" % traceback.format_exc())
+        print("Failed limpiar_capas_analisis (%s)" % 
+            traceback.format_exc())
 
 #-------------------------------------------------------------------------------
 # Retorna los headers para los request
@@ -145,3 +146,39 @@ def convert_seconds(seconds):
     seconds %= 60
 
     return "%d:%02d:%02d" % (hour, minutes, seconds)
+
+
+def log(text):
+    try:
+        log_file = os.path.join(script_dir, 'logs.txt')
+        f = open(log_file, "a", encoding='utf-8')
+        f.write(
+            "{0} -- {1}\n".format(datetime.now().strftime("%Y-%m-%d %H:%M:%S"), text))
+        f.close()
+    except:
+        print("Failed log (%s)" %
+            traceback.format_exc())
+
+
+def error_log(text):
+    try:
+        log_file = os.path.join(script_dir, 'error-logs.txt')
+        f = open(log_file, "a")
+        f.write(
+            "{0} -- {1}\n".format(datetime.now().strftime("%Y-%m-%d %H:%M:%S"), text))
+        f.close()
+    except:
+        print("Failed error_log (%s)" %
+            traceback.format_exc())
+
+
+def query_log(text):
+    try:
+        log_file = os.path.join(script_dir, 'fields-logs.txt')
+        f = open(log_file, "a")
+        f.write(
+            "{0} -- {1}\n".format(datetime.now().strftime("%Y-%m-%d %H:%M:%S"), text))
+        f.close()
+    except:
+        print("Failed error_log (%s)" %
+            traceback.format_exc())
