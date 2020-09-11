@@ -1,3 +1,6 @@
 __pycache__/
 .vscode/
 .env
+fields-logs.txt
+error-logs.txt
+logs.txt

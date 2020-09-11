@@ -81,7 +81,7 @@
             }
         ]},{
         "table": "data_eat",
-        "active": true,
+        "active": false,
         "attributes": [
             "id",
             "nombre",
@@ -211,7 +211,7 @@
             }
         ]},{
         "table": "data_sat",
-        "active": true,
+        "active": false,
         "attributes": [
             "id",
             "nombre",
@@ -288,7 +288,7 @@
             }
         ]},{
         "table": "data_iit",
-        "active": true,
+        "active": false,
         "attributes": [
             "id",
             "nombre",
@@ -365,7 +365,7 @@
             }
         ]},{
         "table": "data_pf",
-        "active": true,
+        "active": false,
         "attributes": [
             "id",
             "nombre",
@@ -419,7 +419,7 @@
             }
         ]},{
         "table": "data_snaspe",
-        "active": true,
+        "active": false,
         "attributes": [
             "id",
             "nombre",
@@ -482,7 +482,7 @@
             }
         ]},{
         "table": "data_ene",
-        "active": true,
+        "active": false,
         "attributes": [
             "id",
             "nombre",
@@ -533,7 +533,7 @@
             }
         ]},{
         "table": "data_pdi",
-        "active": true,
+        "active": false,
         "attributes": [
             "id",
             "nombre",
@@ -660,7 +660,7 @@
             }
         ]},{
         "table": "data_jac",
-        "active": true,
+        "active": false,
         "attributes": [
             "id",
             "nombre",
@@ -801,7 +801,7 @@
         }
         ]},{
         "table": "data_mop",
-        "active": true,
+        "active": false,
         "attributes": [
             "id",
             "nombre",

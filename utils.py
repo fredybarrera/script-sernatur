@@ -35,8 +35,10 @@ def get_token():
 
         return token['access_token']
     except:
-        print("Failed get_token (%s), (%s)" %
-            traceback.format_exc(), url_rest)
+        print("Failed get_token (%s)" %
+            traceback.format_exc())
+        error_log("Failed get_token (%s)" %
+            traceback.format_exc())
 
 #-------------------------------------------------------------------------------
 # Retorna una conexion hacia Postgres
@@ -47,8 +49,10 @@ def getConexion():
                                 user=const.USUARIO_BD, password=const.PASSWORD_BD)
         return conexion
     except:
-        print("Failed getConexion (%s), (%s)" %
-            traceback.format_exc(), url_rest)
+        print("Failed getConexion (%s)" %
+            traceback.format_exc())
+        error_log("Failed getConexion (%s)" %
+            traceback.format_exc())
 
 #-------------------------------------------------------------------------------
 # Permite ejecutar una consulta de tipo POST al servicio REST
@@ -62,8 +66,10 @@ def post_request(url_rest, token, where):
         }
         return requests.post(url_rest, data=data, headers=get_headers())
     except:
-        print("Failed post_request (%s), (%s)" %
-            traceback.format_exc(), url_rest)
+        print("Failed post_request (%s)" %
+            traceback.format_exc())
+        error_log("Failed post_request (%s)" %
+            traceback.format_exc())
 
 #-------------------------------------------------------------------------------
 # Permite insertar features al servicio REST
@@ -77,8 +83,10 @@ def post_request_add(url_rest, token, features):
         }
         return requests.post(url_rest, data=data, headers=get_headers())
     except:
-        print("Failed post_request (%s), (%s)" %
-            traceback.format_exc(), url_rest)
+        print("Failed post_request_add (%s)" %
+            traceback.format_exc())
+        error_log("Failed post_request_add (%s)" %
+            traceback.format_exc())
 
 #-------------------------------------------------------------------------------
 # Realiza una peticion http de tipo get simple
@@ -96,6 +104,8 @@ def get_request(url):
     except:
         print("Failed get_request (%s)" %
             traceback.format_exc())
+        error_log("Failed get_request (%s)" %
+            traceback.format_exc())
 
 #-------------------------------------------------------------------------------
 # Realiza una peticion http de tipo POST con raw_data en formato json
@@ -110,6 +120,8 @@ def post_request_json_raw_data(url, raw_data):
     except:
         print("Failed post_request_payload (%s)" %
             traceback.format_exc())
+        error_log("Failed post_request_payload (%s)" %
+            traceback.format_exc())
 
 #-------------------------------------------------------------------------------
 # Limpia las capas de resultados
@@ -121,6 +133,8 @@ def limpiar_capas_analisis(url_rest, table, token, where):
         return response
     except:
         print("Failed limpiar_capas_analisis (%s)" % 
+            traceback.format_exc())
+        error_log("Failed limpiar_capas_analisis (%s)" %
             traceback.format_exc())
 
 #-------------------------------------------------------------------------------
@@ -158,6 +172,8 @@ def log(text):
     except:
         print("Failed log (%s)" %
             traceback.format_exc())
+        error_log("Failed log (%s)" %
+            traceback.format_exc())
 
 
 def error_log(text):
@@ -167,6 +183,7 @@ def error_log(text):
         f.write(
             "{0} -- {1}\n".format(datetime.now().strftime("%Y-%m-%d %H:%M:%S"), text))
         f.close()
+        exit()
     except:
         print("Failed error_log (%s)" %
             traceback.format_exc())
@@ -181,4 +198,6 @@ def query_log(text):
         f.close()
     except:
         print("Failed error_log (%s)" %
+            traceback.format_exc())
+        error_log("Failed query_log (%s)" %
             traceback.format_exc())
